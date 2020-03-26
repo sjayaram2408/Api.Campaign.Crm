@@ -10,7 +10,6 @@ namespace Api.Campaign.Crm.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    [Authorize]
     public class IdentityController : ControllerBase
     {
         [HttpGet]

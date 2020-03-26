@@ -2,8 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using DealerSocket.AspNetHosting.Mvc.Extensions;
-using DealerSocket.AspNetHosting.Mvc.Filters;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -21,7 +19,7 @@ namespace Api.Campaign.Crm
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration, Microsoft.AspNetCore.Hosting.IHostingEnvironment env)
+        public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
@@ -32,7 +30,6 @@ namespace Api.Campaign.Crm
         // This method gets called by the runtime. Use this method to add services to the container
         public void ConfigureServices(IServiceCollection services)
         {
-            const string apiScope = "crm_api";
             //const string campaignScope = "campaign";
 
             var settings = Settings ?? Configuration.GetApplicationSettings();
@@ -45,15 +42,13 @@ namespace Api.Campaign.Crm
 
             services.AddMvc(op =>
             {
-                var policy = new AuthorizationPolicyBuilder()
-                    .AddRequirements(new ScopeRequirement(new[] { apiScope }))
-                    .Build();
+                var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
 
                 op.Filters.Add(new AuthorizeFilter(policy));
                 op.Filters.Add(new GlobalValidateModelStateFilter());
             });
 
-            services.AddSwaggerService(settings.Swagger);
+            //services.AddSwaggerService(settings.Swagger);
 
             // Authentication
             services.AddTransient<IAuthorizationHandler, ScopeAuthorizationHandler>();
@@ -68,7 +63,7 @@ namespace Api.Campaign.Crm
             {
                 ForwardedHeaders = ForwardedHeaders.XForwardedFor
             });
-            app.UseRequestLogging(settings.Logging);
+            app.UseRequestLogging();
             app.UseDefaultCorsPolicy(settings.Cors);
             app.UseAuthentication();
             app.UseMvc();

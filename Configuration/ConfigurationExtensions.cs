@@ -37,10 +37,9 @@ namespace Api.Campaign.Crm
             return applicationSettings;
         }
 
-        public static IServiceCollection AddDefaultApplicationSettings(this IServiceCollection collection, ApplicationSettings settings)
+        public static void AddDefaultApplicationSettings(this IServiceCollection collection, ApplicationSettings settings)
         {
             collection.Replace(new ServiceDescriptor(typeof(ApplicationSettings), settings));
-            return collection;
         }
     }
 }

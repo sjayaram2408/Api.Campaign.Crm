@@ -1,6 +1,4 @@
 ﻿
-using DealerSocket.AspNetHosting.Mvc.Configuration;
-
 namespace Api.Campaign.Crm
 {
     public class ApplicationSettings
