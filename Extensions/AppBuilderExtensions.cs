@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using Api.Campaign.Crm.Configuration;
+using Api.Campaign.Crm.Middleware;
+using Microsoft.AspNetCore.Builder;
 using System;
 using System.Linq;
 
-namespace Api.Campaign.Crm
+namespace Api.Campaign.Crm.Extensions
 {
     public static class AppBuilderExtensions
     {

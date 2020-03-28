@@ -1,23 +1,46 @@
-﻿using Microsoft.Extensions.Configuration;
-using Newtonsoft.Json.Linq;
-using Serilog;
-using Serilog.Formatting.Json;
-using Serilog.Sinks.SystemConsole.Themes;
+﻿using Api.Campaign.Crm.Configuration;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
+using System;
+using System.Linq;
+using System.Reflection;
 
-namespace Api.Campaign.Crm
+namespace Api.Campaign.Crm.Extensions
 {
-    public static class LoggerConfigurationExtensions
+    public static class ConfigurationExtensions
     {
+        private const string DefaultConfigSection = "Application";
 
-        public static void ConfigureLocalLogger(this IConfiguration configuration)
+        public static ApplicationSettings GetApplicationSettings(this IConfiguration config)
         {
-            Log.Logger = new LoggerConfiguration()
-                .ReadFrom.Configuration(configuration)
-                .Destructure.AsScalar<JObject>()
-                .Destructure.AsScalar<JArray>()
-                .Enrich.FromLogContext()
-                .WriteTo.Console(theme: AnsiConsoleTheme.Code)
-                .CreateLogger();
+            return GetApplicationSettings(config, DefaultConfigSection);
+        }
+
+        public static ApplicationSettings GetApplicationSettings(this IConfiguration config, string configSection)
+        {
+            var applicationSettings = config.GetSection(configSection).Get<ApplicationSettings>();
+
+            if (!string.IsNullOrWhiteSpace(applicationSettings.Cors.AllowedOriginsString))
+            {
+                applicationSettings.Cors.AllowedOrigins =
+                    applicationSettings.Cors.AllowedOriginsString?.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries).Select(s => s.Trim()).ToList();
+            }
+
+            applicationSettings.Swagger.OAuth2Authority = applicationSettings.Authentication.Authority;
+
+            if (string.IsNullOrEmpty(applicationSettings.Swagger.DocumentationLocation))
+            {
+                var assembly = typeof(Startup).GetTypeInfo().Assembly;
+                applicationSettings.Swagger.DocumentationLocation = assembly.Location.Replace(".dll", ".xml");
+            }
+
+            return applicationSettings;
+        }
+
+        public static void AddDefaultApplicationSettings(this IServiceCollection collection, ApplicationSettings settings)
+        {
+            collection.Replace(new ServiceDescriptor(typeof(ApplicationSettings), settings));
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.Filters;
 
-namespace Api.Campaign.Crm
+namespace Api.Campaign.Crm.Filters
 {
     /// <inheritdoc />
     /// <summary>

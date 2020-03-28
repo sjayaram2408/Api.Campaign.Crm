@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using System.Collections.Generic;
 
-namespace Api.Campaign.Crm
+namespace Api.Campaign.Crm.Configuration
 {
     public class ScopeRequirement : IAuthorizationRequirement
     {

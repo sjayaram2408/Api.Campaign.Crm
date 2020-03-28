@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Api.Campaign.Crm
+namespace Api.Campaign.Crm.Configuration
 {
     public class LoggingSettings
     {

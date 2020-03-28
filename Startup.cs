@@ -2,6 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Api.Campaign.Crm.Configuration;
+using Api.Campaign.Crm.Extensions;
+using Api.Campaign.Crm.Filters;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -14,6 +17,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
+using Serilog;
 
 namespace Api.Campaign.Crm
 {
@@ -34,13 +38,11 @@ namespace Api.Campaign.Crm
 
             var settings = Settings ?? Configuration.GetApplicationSettings();
 
-            services.AddMvc(options => options.EnableEndpointRouting = false);
-
             services.AddDefaultApplicationSettings(settings);
 
             services.AddAuthenticationService(settings.Authentication);
 
-            services.AddMvc(op =>
+            services.AddControllers(op =>
             {
                 var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
 
@@ -48,12 +50,8 @@ namespace Api.Campaign.Crm
                 op.Filters.Add(new GlobalValidateModelStateFilter());
             });
 
-            //services.AddSwaggerService(settings.Swagger);
-
             // Authentication
             services.AddTransient<IAuthorizationHandler, ScopeAuthorizationHandler>();
-
-            services.AddMemoryCache();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline
@@ -64,9 +62,16 @@ namespace Api.Campaign.Crm
                 ForwardedHeaders = ForwardedHeaders.XForwardedFor
             });
             app.UseRequestLogging();
+            app.UseSerilogRequestLogging();
             app.UseDefaultCorsPolicy(settings.Cors);
             app.UseAuthentication();
-            app.UseMvc();
+            app.UseRouting();
+            app.UseAuthorization();
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapDefaultControllerRoute();
+                endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
+            });
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {

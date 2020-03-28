@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using System.Threading.Tasks;
 
-namespace Api.Campaign.Crm
+namespace Api.Campaign.Crm.Configuration
 { 
     public class ScopeAuthorizationHandler : AuthorizationHandler<ScopeRequirement>
     {

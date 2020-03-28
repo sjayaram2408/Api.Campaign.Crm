@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.Filters;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Api.Campaign.Crm
+namespace Api.Campaign.Crm.Filters
 {
     /// <inheritdoc />
     /// <summary>

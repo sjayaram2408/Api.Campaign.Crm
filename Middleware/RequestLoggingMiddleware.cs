@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Api.Campaign.Crm.Configuration;
+using Api.Campaign.Crm.Logging.Enrichers;
+using Microsoft.AspNetCore.Http;
 using Serilog;
 using Serilog.Context;
 using Serilog.Events;
@@ -7,7 +9,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Api.Campaign.Crm
+namespace Api.Campaign.Crm.Middleware
 {
     public class RequestLoggingMiddleware
     {

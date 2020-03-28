@@ -1,9 +1,10 @@
-﻿using Audit.Core;
+﻿using Api.Campaign.Crm.Logging.Enrichers;
+using Audit.Core;
 using Audit.WebApi;
 using Serilog;
 using Serilog.Context;
 
-namespace Api.Campaign.Crm
+namespace Api.Campaign.Crm.Logging
 {
     public class AuditLogCloudWatchProvider : AuditDataProvider
     {

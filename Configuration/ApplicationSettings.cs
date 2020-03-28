@@ -1,5 +1,5 @@
 ﻿
-namespace Api.Campaign.Crm
+namespace Api.Campaign.Crm.Configuration
 {
     public class ApplicationSettings
     {

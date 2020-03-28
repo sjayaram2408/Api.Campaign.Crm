@@ -5,7 +5,7 @@ using Serilog.Events;
 using System;
 using System.Collections.Generic;
 
-namespace Api.Campaign.Crm
+namespace Api.Campaign.Crm.Logging.Enrichers
 {
     internal class AuditLogEnricher : ILogEventEnricher
     {

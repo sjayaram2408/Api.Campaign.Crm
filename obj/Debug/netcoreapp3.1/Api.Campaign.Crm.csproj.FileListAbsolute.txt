@@ -115,5 +115,15 @@ C:\Users\sjayaram\source\repos\Api.Campaign.Crm\Api.Campaign.Crm\bin\Debug\netco
 C:\Users\sjayaram\source\repos\Api.Campaign.Crm\Api.Campaign.Crm\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bson.dll
 C:\Users\sjayaram\source\repos\Api.Campaign.Crm\Api.Campaign.Crm\bin\Debug\netcoreapp3.1\System.Security.Cryptography.Pkcs.dll
 C:\Users\sjayaram\source\repos\Api.Campaign.Crm\Api.Campaign.Crm\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.1\System.Security.Cryptography.Pkcs.dll
+C:\Users\sjayaram\source\repos\Api.Campaign.Crm\Api.Campaign.Crm\bin\Debug\netcoreapp3.1\Serilog.AspNetCore.dll
+C:\Users\sjayaram\source\repos\Api.Campaign.Crm\Api.Campaign.Crm\bin\Debug\netcoreapp3.1\Serilog.Extensions.Hosting.dll
+C:\Users\sjayaram\source\repos\Api.Campaign.Crm\Api.Campaign.Crm\bin\Debug\netcoreapp3.1\Serilog.Extensions.Logging.dll
+C:\Users\sjayaram\source\repos\Api.Campaign.Crm\Api.Campaign.Crm\bin\Debug\netcoreapp3.1\Serilog.Formatting.Compact.dll
+C:\Users\sjayaram\source\repos\Api.Campaign.Crm\Api.Campaign.Crm\bin\Debug\netcoreapp3.1\Serilog.Sinks.Debug.dll
+C:\Users\sjayaram\source\repos\Api.Campaign.Crm\Api.Campaign.Crm\bin\Debug\netcoreapp3.1\Serilog.Sinks.File.dll
+C:\Users\sjayaram\source\repos\Api.Campaign.Crm\Api.Campaign.Crm\bin\Debug\netcoreapp3.1\Elasticsearch.Net.dll
+C:\Users\sjayaram\source\repos\Api.Campaign.Crm\Api.Campaign.Crm\bin\Debug\netcoreapp3.1\Serilog.Formatting.Elasticsearch.dll
+C:\Users\sjayaram\source\repos\Api.Campaign.Crm\Api.Campaign.Crm\bin\Debug\netcoreapp3.1\Serilog.Sinks.Elasticsearch.dll
+C:\Users\sjayaram\source\repos\Api.Campaign.Crm\Api.Campaign.Crm\bin\Debug\netcoreapp3.1\Serilog.Sinks.PeriodicBatching.dll
 C:\Users\sjayaram\source\repos\Api.Campaign.Crm\Api.Campaign.Crm\obj\Debug\netcoreapp3.1\Api.Campaign.Crm.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\sjayaram\source\repos\Api.Campaign.Crm\Api.Campaign.Crm\obj\Debug\netcoreapp3.1\Api.Campaign.Crm.MvcApplicationPartsAssemblyInfo.cache

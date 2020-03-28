@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Api.Campaign.Crm.Configuration;
+using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json.Linq;
 using Serilog.Core;
 using Serilog.Events;
@@ -7,7 +8,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-namespace Api.Campaign.Crm
+namespace Api.Campaign.Crm.Logging.Enrichers
 {
     // https://www.w3.org/TR/WD-logfile.html
     internal class W3CRequestEnricher : ILogEventEnricher
