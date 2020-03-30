@@ -18,7 +18,14 @@
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="5.2.1" />
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="5.2.1" />
     <PackageReference Include="Swashbuckle.Core" Version="5.6.0" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.7.0" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="5.6.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="DealerSocket.Crm.Integrations.FacebookAudience">
+      <HintPath>..\..\..\..\..\..\git\dealersocket.crm.integrations\src\DealerSocket.Crm.Integrations.FacebookAudience\bin\DealerSocket.Crm.Integrations.FacebookAudience.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 

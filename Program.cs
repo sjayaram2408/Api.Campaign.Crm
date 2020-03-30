@@ -36,9 +36,6 @@ namespace Api.Campaign.Crm
                 {
                     webBuilder.UseStartup<Startup>();
                     webBuilder.UseConfiguration(Configuration);
-                }).ConfigureLogging(webBuilder =>
-                {
-                    webBuilder.AddSerilog();
                 });
     }
 }

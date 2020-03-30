@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Api.Campaign.Crm.Configuration;
 using Api.Campaign.Crm.Extensions;
 using Api.Campaign.Crm.Filters;
+using DealerSocket.Crm.Integrations.FacebookAudience.Interfaces;
+using DealerSocket.Crm.Integrations.FacebookAudience.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -50,8 +52,8 @@ namespace Api.Campaign.Crm
                 op.Filters.Add(new GlobalValidateModelStateFilter());
             });
 
-            // Authentication
             services.AddTransient<IAuthorizationHandler, ScopeAuthorizationHandler>();
+            services.AddTransient<IAudienceManagerService, AudienceManagerService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline
