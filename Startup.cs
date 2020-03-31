@@ -5,8 +5,9 @@ using System.Threading.Tasks;
 using Api.Campaign.Crm.Configuration;
 using Api.Campaign.Crm.Extensions;
 using Api.Campaign.Crm.Filters;
-using DealerSocket.Crm.Integrations.FacebookAudience.Interfaces;
-using DealerSocket.Crm.Integrations.FacebookAudience.Services;
+using Api.Campaign.Crm.Services;
+using Api.Campaign.Crm.Services.Interfaces;
+using Api.Campaign.Crm.ThirdPartyCalls;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -54,6 +55,7 @@ namespace Api.Campaign.Crm
 
             services.AddTransient<IAuthorizationHandler, ScopeAuthorizationHandler>();
             services.AddTransient<IAudienceManagerService, AudienceManagerService>();
+            services.AddTransient<IAudienceManagerThirdParty, AudienceManagerThirdParty>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline

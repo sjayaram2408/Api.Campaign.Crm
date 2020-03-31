@@ -4,9 +4,7 @@ using System.Configuration;
 using System.Linq;
 using System.Threading.Tasks;
 using Api.Campaign.Crm.Models;
-using DealerSocket.Crm.Integrations.FacebookAudience.Interfaces;
-using DealerSocket.Crm.Integrations.FacebookAudience.Models;
-using DealerSocket.Crm.Integrations.FacebookAudience.Services;
+using Api.Campaign.Crm.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -24,9 +22,9 @@ namespace Api.Campaign.Crm.Controllers
         private IAudienceManagerService _audienceManagerService;
         private readonly ILogger<FacebookController> _logger;
         private IConfiguration _configuration;
-        public AudienceManager SampleAudienceManager => new AudienceManager
+        public FacebookAudienceManager SampleAudienceManager => new FacebookAudienceManager
         {
-            Account = new Account
+            Account = new FacebookAccount
             {
                 Id = "exampleAdAccountId",
                 AccessToken = "exampleAccessToken",
@@ -60,23 +58,7 @@ namespace Api.Campaign.Crm.Controllers
             string result = string.Empty;
             try
             {
-                ConfigurationManager.AppSettings["FacebookAudience.AccessToken"] = _configuration["ApplicationSettings:Facebook:AccessToken"];
-                ConfigurationManager.AppSettings["FacebookAudience.AppSecret"] = _configuration["ApplicationSettings:Facebook:AppSecret"];
-                AudienceManager fbAudienceManager = new AudienceManager
-                {
-                    Account = new Account
-                    {
-                        Id = facebookAudienceManager.Account.Id,
-                        AccessToken = facebookAudienceManager.Account.AccessToken,
-                        CustomAudienceId = facebookAudienceManager.Account.CustomAudienceId
-                    },
-                    AddressId = facebookAudienceManager.AddressId,
-                    Description = facebookAudienceManager.Description,
-                    Name = facebookAudienceManager.Name,
-                    SiteId = facebookAudienceManager.SiteId,
-                    UseMock = facebookAudienceManager.UseMock
-                };
-                result = _audienceManagerService.CreateCustomAudience(fbAudienceManager);
+                result = _audienceManagerService.CreateCustomAudience(facebookAudienceManager);
             }
             catch (Exception ex)
             {
