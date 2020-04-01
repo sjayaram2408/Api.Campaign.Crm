@@ -51,6 +51,10 @@
               "target": "Package",
               "version": "[15.0.5, )"
             },
+            "IdentityModel": {
+              "target": "Package",
+              "version": "[4.2.0, )"
+            },
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
               "version": "[3.1.2, )"
@@ -94,10 +98,6 @@
             "Swashbuckle.Core": {
               "target": "Package",
               "version": "[5.6.0, )"
-            },
-            "System.Configuration.ConfigurationManager": {
-              "target": "Package",
-              "version": "[4.7.0, )"
             },
             "System.IdentityModel.Tokens.Jwt": {
               "target": "Package",

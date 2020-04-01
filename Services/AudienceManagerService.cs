@@ -47,5 +47,40 @@ namespace Api.Campaign.Crm.Services
 
             return _audienceManagerThirdParty.CreateCustomAudience(audienceManager).Result;
         }
+
+        public string CreateCustomAudienceIntegration(FacebookAudienceManager audienceManager)
+        {
+            if (audienceManager.Account == null)
+            {
+                throw new Exception("null account");
+            }
+
+            if (audienceManager.AddressId < 1)
+            {
+                throw new Exception("invalid addressId");
+            }
+
+            if (audienceManager.SiteId < 1)
+            {
+                throw new Exception("invalid siteId");
+            }
+
+            if (string.IsNullOrWhiteSpace(audienceManager.Description))
+            {
+                throw new Exception("invalid Description");
+            }
+
+            if (string.IsNullOrWhiteSpace(audienceManager.Name))
+            {
+                throw new Exception("invalid Name");
+            }
+
+            if (string.IsNullOrWhiteSpace(audienceManager.Account.Id))
+            {
+                throw new Exception("invalid Id (ad account id)");
+            }
+
+            return _audienceManagerThirdParty.CreateCustomAudienceIntegration(audienceManager).Result;
+        }
     }
 }

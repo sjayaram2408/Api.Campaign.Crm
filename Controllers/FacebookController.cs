@@ -52,13 +52,30 @@ namespace Api.Campaign.Crm.Controllers
         }
 
         [HttpPost]
-        [Route("")]
-        public IActionResult Post([FromBody] FacebookAudienceManager facebookAudienceManager)
+        [Route("CreateCustomAudience")]
+        public IActionResult CreateCustomAudience([FromBody] FacebookAudienceManager facebookAudienceManager)
         {
             string result = string.Empty;
             try
             {
                 result = _audienceManagerService.CreateCustomAudience(facebookAudienceManager);
+            }
+            catch (Exception ex)
+            {
+                this._logger.LogError(ex.Message);
+            }
+
+            return new JsonResult(result);
+        }
+
+        [HttpPost]
+        [Route("CreateCustomAudienceIntegration")]
+        public IActionResult CreateCustomAudienceIntegration([FromBody] FacebookAudienceManager facebookAudienceManager)
+        {
+            string result = string.Empty;
+            try
+            {
+                result = _audienceManagerService.CreateCustomAudienceIntegration(facebookAudienceManager);
             }
             catch (Exception ex)
             {
