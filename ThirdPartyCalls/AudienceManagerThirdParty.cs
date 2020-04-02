@@ -44,7 +44,7 @@ namespace Api.Campaign.Crm.ThirdPartyCalls
                 { "customer_file_source", "USER_PROVIDED_ONLY" },
                 { "access_token", audienceManager.Account.AccessToken },
                 { "retention_days","60"},
-                { "fields","id,name,retention_days,time_created"}
+                { "fields","id,name,retention_days,time_created,time_updated"}
             };
             var content = new FormUrlEncodedContent(values);
 
@@ -58,7 +58,7 @@ namespace Api.Campaign.Crm.ThirdPartyCalls
             return await Task.FromResult(fakeOutput);
         }
 
-        public async Task<string> CreateCustomAudienceIntegration(FacebookAudienceManager audienceManager)
+        public async Task<FacebookAudienceResponse> CreateCustomAudienceIntegration(FacebookAudienceManager audienceManager)
         {
             if (audienceManager?.Account == null)
             {
@@ -72,8 +72,9 @@ namespace Api.Campaign.Crm.ThirdPartyCalls
             var response = await HttpClient.PostAsync("https://iapi.local.dealersocket.com/FacebookAudienceManager", stringContent).ConfigureAwait(false);
             if (response.IsSuccessStatusCode)
             {
-                return await response.Content.ReadAsStringAsync();
-
+                var stringToParse = JsonConvert.DeserializeObject<string>(await response.Content.ReadAsStringAsync().ConfigureAwait(false));
+                var customAudience = JsonConvert.DeserializeObject<FacebookAudienceResponse>(stringToParse);
+                return customAudience;
             }
 
             throw new Exception(

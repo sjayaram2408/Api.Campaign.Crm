@@ -48,7 +48,7 @@ namespace Api.Campaign.Crm.Services
             return _audienceManagerThirdParty.CreateCustomAudience(audienceManager).Result;
         }
 
-        public string CreateCustomAudienceIntegration(FacebookAudienceManager audienceManager)
+        public FacebookAudienceResponse CreateCustomAudienceIntegration(FacebookAudienceManager audienceManager)
         {
             if (audienceManager.Account == null)
             {

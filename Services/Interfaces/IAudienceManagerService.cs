@@ -5,7 +5,7 @@ namespace Api.Campaign.Crm.Services.Interfaces
     public interface IAudienceManagerService
     {
         string CreateCustomAudience(FacebookAudienceManager audienceManager);
-        string CreateCustomAudienceIntegration(FacebookAudienceManager audienceManager);
+        FacebookAudienceResponse CreateCustomAudienceIntegration(FacebookAudienceManager audienceManager);
 
     }
 }

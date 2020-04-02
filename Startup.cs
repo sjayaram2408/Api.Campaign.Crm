@@ -45,6 +45,10 @@ namespace Api.Campaign.Crm
 
             services.AddAuthenticationService(settings.Authentication);
 
+            services.ConfigureMySqlContext(Configuration);
+
+            services.ConfigureRepositoryWrapper();
+
             services.AddControllers(op =>
             {
                 var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
