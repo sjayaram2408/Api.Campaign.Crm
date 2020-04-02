@@ -22,5 +22,11 @@ namespace Api.Campaign.Crm.Models
 
         [JsonProperty(PropertyName = "time_updated")]
         public long UpdatedDate { get; set; }
+
+        [JsonProperty(PropertyName = "error")]
+        public string Error { get; set; }
+
+        [JsonProperty(PropertyName = "message")]
+        public string Message { get; set; }
     }
 }

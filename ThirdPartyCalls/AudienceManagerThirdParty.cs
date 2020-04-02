@@ -27,37 +27,6 @@ namespace Api.Campaign.Crm.ThirdPartyCalls
             _configuration = configuration;
         }
 
-        public async Task<string> CreateCustomAudience(FacebookAudienceManager audienceManager)
-        {
-            if (audienceManager?.Account == null)
-            {
-                throw new Exception("null audienceManager or audienceManager.Account");
-            }
-
-            audienceManager.Account.AccessToken = _accessToken;
-
-            var values = new Dictionary<string, string>
-            {
-                { "name", audienceManager.Name},
-                { "subtype", "CUSTOM" },
-                { "description", audienceManager.Description},
-                { "customer_file_source", "USER_PROVIDED_ONLY" },
-                { "access_token", audienceManager.Account.AccessToken },
-                { "retention_days","60"},
-                { "fields","id,name,retention_days,time_created,time_updated"}
-            };
-            var content = new FormUrlEncodedContent(values);
-
-            if (audienceManager.UseMock != true)
-            {
-                var response = await HttpClient.PostAsync("https://" + $"graph.facebook.com/v5.0/act_{audienceManager.Account.Id}/customaudiences", content);
-                return await response.Content.ReadAsStringAsync();
-            }
-
-            const string fakeOutput = "{\"success\":true}"; //this is what they really respond with
-            return await Task.FromResult(fakeOutput);
-        }
-
         public async Task<FacebookAudienceResponse> CreateCustomAudienceIntegration(FacebookAudienceManager audienceManager)
         {
             if (audienceManager?.Account == null)

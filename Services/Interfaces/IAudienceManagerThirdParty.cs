@@ -5,7 +5,6 @@ namespace Api.Campaign.Crm.Services.Interfaces
 {
     public interface IAudienceManagerThirdParty
     {
-        Task<string> CreateCustomAudience(FacebookAudienceManager audienceManager);
         Task<FacebookAudienceResponse> CreateCustomAudienceIntegration(FacebookAudienceManager audienceManager);
 
     }

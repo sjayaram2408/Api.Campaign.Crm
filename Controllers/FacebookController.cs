@@ -24,20 +24,6 @@ namespace Api.Campaign.Crm.Controllers
         private IAudienceManagerService _audienceManagerService;
         private readonly ILogger<FacebookController> _logger;
         private IRepositoryWrapper _repoWrapper;
-        public FacebookAudienceManager SampleAudienceManager => new FacebookAudienceManager
-        {
-            Account = new FacebookAccount
-            {
-                Id = "exampleAdAccountId",
-                AccessToken = "exampleAccessToken",
-                CustomAudienceId = "exampleCustomAudienceId"
-            },
-            AddressId = 1,
-            Description = "exampleDescription",
-            Name = "exampleName",
-            SiteId = 3,
-            UseMock = true
-        };
 
         public FacebookController(IAudienceManagerService audienceManagerService, ILogger<FacebookController> logger, IRepositoryWrapper repoWrapper)
         {
@@ -46,32 +32,8 @@ namespace Api.Campaign.Crm.Controllers
             _repoWrapper = repoWrapper;
         }
 
-        [HttpGet]
-        [Route("")]
-        public IActionResult Get()
-        {
-            return new JsonResult(SampleAudienceManager);
-        }
-
         [HttpPost]
         [Route("CreateCustomAudience")]
-        public IActionResult CreateCustomAudience([FromBody] FacebookAudienceManager facebookAudienceManager)
-        {
-            string result = string.Empty;
-            try
-            {
-                result = _audienceManagerService.CreateCustomAudience(facebookAudienceManager);
-            }
-            catch (Exception ex)
-            {
-                this._logger.LogError(ex.Message);
-            }
-
-            return new JsonResult(result);
-        }
-
-        [HttpPost]
-        [Route("CreateCustomAudienceIntegration")]
         public IActionResult CreateCustomAudienceIntegration([FromBody] FacebookAudienceManager facebookAudienceManager)
         {
             FacebookAudienceResponse result = new FacebookAudienceResponse();
@@ -79,18 +41,26 @@ namespace Api.Campaign.Crm.Controllers
             try
             {
                 result = _audienceManagerService.CreateCustomAudienceIntegration(facebookAudienceManager);
-                siteAudience.SiteId = facebookAudienceManager.SiteId;
-                siteAudience.AudienceId = result.AudienceId;
-                siteAudience.AudienceName = result.AudienceName;
-                siteAudience.RetentionDays = result.RetentionDays;
-                siteAudience.CreatedDate = DateTimeExtensions.ToDateTimeFromEpoch(result.CreatedDate);
-                siteAudience.UpdatedDate = DateTimeExtensions.ToDateTimeFromEpoch(result.UpdatedDate);
-                _repoWrapper.SiteAudience.Create(siteAudience);
-                _repoWrapper.Save();
+                if (result.Error != null)
+                {
+                    siteAudience.SiteId = facebookAudienceManager.SiteId;
+                    siteAudience.AudienceId = result.AudienceId;
+                    siteAudience.AudienceName = result.AudienceName;
+                    siteAudience.RetentionDays = result.RetentionDays;
+                    siteAudience.CreatedDate = DateTimeExtensions.ToDateTimeFromEpoch(result.CreatedDate);
+                    siteAudience.UpdatedDate = DateTimeExtensions.ToDateTimeFromEpoch(result.UpdatedDate);
+                    _repoWrapper.SiteAudience.Create(siteAudience);
+                    _repoWrapper.Save();
+                }
+                else 
+                {
+                    throw new Exception(result.Message);
+                }
             }
             catch (Exception ex)
             {
                 this._logger.LogError(ex.Message);
+                return new JsonResult("Server Error");
             }
 
             return new JsonResult(siteAudience);
