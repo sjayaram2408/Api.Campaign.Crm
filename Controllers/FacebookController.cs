@@ -41,7 +41,7 @@ namespace Api.Campaign.Crm.Controllers
             try
             {
                 result = _audienceManagerService.CreateCustomAudienceIntegration(facebookAudienceManager);
-                if (result.Error != null)
+                if (result.Error == null)
                 {
                     siteAudience.SiteId = facebookAudienceManager.SiteId;
                     siteAudience.AudienceId = result.AudienceId;
@@ -54,7 +54,7 @@ namespace Api.Campaign.Crm.Controllers
                 }
                 else 
                 {
-                    throw new Exception(result.Message);
+                    throw new Exception(result.Error.Type  + "|message-" + result.Error.Message + "|fbtrace_id-" + result.Error.Type);
                 }
             }
             catch (Exception ex)

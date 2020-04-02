@@ -24,9 +24,6 @@ namespace Api.Campaign.Crm.Models
         public long UpdatedDate { get; set; }
 
         [JsonProperty(PropertyName = "error")]
-        public string Error { get; set; }
-
-        [JsonProperty(PropertyName = "message")]
-        public string Message { get; set; }
+        public FacebookAudienceErrorResponse Error { get; set; }
     }
 }
