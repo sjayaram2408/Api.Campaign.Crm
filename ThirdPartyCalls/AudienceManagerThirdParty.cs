@@ -22,8 +22,6 @@ namespace Api.Campaign.Crm.ThirdPartyCalls
 
         public AudienceManagerThirdParty(IConfiguration configuration)
         {
-            _accessToken = configuration["ApplicationSettings:Facebook:AccessToken"];
-            _appSecret = configuration["ApplicationSettings:Facebook:AppSecret"];
             _configuration = configuration;
         }
 
@@ -38,7 +36,7 @@ namespace Api.Campaign.Crm.ThirdPartyCalls
                 .ConfigureAwait(false);
             HttpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             var stringContent = new StringContent(JsonConvert.SerializeObject(audienceManager), Encoding.UTF8, "application/json");
-            var response = await HttpClient.PostAsync("https://iapi.local.dealersocket.com/FacebookAudienceManager", stringContent).ConfigureAwait(false);
+            var response = await HttpClient.PostAsync("https://iapi-teamtardis.dealersocket.engineering/webapi/facebookAudienceManager", stringContent).ConfigureAwait(false);
             if (response.IsSuccessStatusCode)
             {
                 var stringToParse = JsonConvert.DeserializeObject<string>(await response.Content.ReadAsStringAsync().ConfigureAwait(false));

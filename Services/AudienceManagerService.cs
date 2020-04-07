@@ -40,6 +40,11 @@ namespace Api.Campaign.Crm.Services
                 throw new Exception("invalid Name");
             }
 
+            if (string.IsNullOrWhiteSpace(audienceManager.RetentionDays))
+            {
+                throw new Exception("invalid RetentionDays");
+            }
+
             if (string.IsNullOrWhiteSpace(audienceManager.Account.Id))
             {
                 throw new Exception("invalid Id (ad account id)");

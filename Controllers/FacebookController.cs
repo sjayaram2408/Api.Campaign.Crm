@@ -60,7 +60,6 @@ namespace Api.Campaign.Crm.Controllers
             catch (Exception ex)
             {
                 this._logger.LogError(ex.Message);
-                return new JsonResult("Server Error");
             }
 
             return new JsonResult(siteAudience);

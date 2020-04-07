@@ -13,5 +13,6 @@ namespace Api.Campaign.Crm.Models
         public string Description { get; set; }
         public int SiteId { get; set; }
         public bool UseMock { get; set; }
+        public string RetentionDays { get; set; }
     }
 }
